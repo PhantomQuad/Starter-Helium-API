@@ -5,7 +5,6 @@ import Nav from "react-bootstrap/Nav";
 import DatePicker from "react-datepicker";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
@@ -13,7 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 
 function Commission() {
-  const accountLink = "https://explorer.helium.com/accounts/";
+  // const accountLink = "https://explorer.helium.com/accounts/";
   const hotspotLink = "https://explorer.helium.com/hotspots/";
   const apiClient = new ApiClient();
   const [stats, cStats] = useState({});
@@ -21,16 +20,15 @@ function Commission() {
   const [rate, cRate] = useState(0);
   const [percent, cPercent] = useState(25);
   const [search, cSearch] = useState([""]);
-  const [account, cAccount] = useState({
-    address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
-  });
+  // const [account, cAccount] = useState({
+  //   address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
+  // });
   const [hotspot, cHotspot] = useState({
     name: "Delightful Walnut Starling",
     address: "112KWyajxjigtBZQyHUzqGtUjAFPWaE4uCWpqzbJWs5pYqZZajvL",
   });
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [query, setQuery] = useState("");
 
   const updateStats = (response) => {
     cStats({
