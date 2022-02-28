@@ -15,14 +15,6 @@ app.get("/cors", (req, res) => {
 function App() {
   return (
     <>
-      <Commission />
-    </>
-  );
-}
-
-function App() {
-  return (
-    <>
       <Navb />
       <br />
 
