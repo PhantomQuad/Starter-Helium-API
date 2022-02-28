@@ -18,7 +18,7 @@ function Commission() {
   const [stats, cStats] = useState({});
   const [helium, cHelium] = useState(0);
   const [rate, cRate] = useState(0);
-  const [percent, cPercent] = useState(25);
+  const [percent, cPercent] = useState(0);
   const [search, cSearch] = useState([""]);
   // const [account, cAccount] = useState({
   //   address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
@@ -171,7 +171,13 @@ function Commission() {
                 <div style={{ color: "red" }}>End Date!</div>
               </DatePicker>
             </td>
-            <td>{percent}</td>
+            {/* <td>{percent}</td> */}
+            <td>
+              <input
+                type="number"
+                onChange={(e) => cPercent(e.target.value)}
+              ></input>
+            </td>
             <td>{stats.host}HNT</td>
             <td>{stats.total}HNT</td>
           </tr>
