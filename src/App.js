@@ -1,5 +1,8 @@
 import React from "react";
 import Commission from "./Commission";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,6 +15,17 @@ app.get("/cors", (req, res) => {
 function App() {
   return (
     <>
+      <Commission />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Navb />
+      <br />
+
       <Commission />
     </>
   );
