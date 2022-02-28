@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Starter-Helium-API/static/css/main.69eda509.chunk.css",
+    "main.js": "/Starter-Helium-API/static/js/main.158f424f.chunk.js",
+    "main.js.map": "/Starter-Helium-API/static/js/main.158f424f.chunk.js.map",
+    "runtime-main.js": "/Starter-Helium-API/static/js/runtime-main.a1069441.js",
+    "runtime-main.js.map": "/Starter-Helium-API/static/js/runtime-main.a1069441.js.map",
+    "static/css/2.96c243f5.chunk.css": "/Starter-Helium-API/static/css/2.96c243f5.chunk.css",
+    "static/js/2.d2775c47.chunk.js": "/Starter-Helium-API/static/js/2.d2775c47.chunk.js",
+    "static/js/2.d2775c47.chunk.js.map": "/Starter-Helium-API/static/js/2.d2775c47.chunk.js.map",
+    "index.html": "/Starter-Helium-API/index.html",
+    "precache-manifest.0cfd9c2530bafcce866ce2cce10ea7b1.js": "/Starter-Helium-API/precache-manifest.0cfd9c2530bafcce866ce2cce10ea7b1.js",
+    "service-worker.js": "/Starter-Helium-API/service-worker.js",
+    "static/css/2.96c243f5.chunk.css.map": "/Starter-Helium-API/static/css/2.96c243f5.chunk.css.map",
+    "static/css/main.69eda509.chunk.css.map": "/Starter-Helium-API/static/css/main.69eda509.chunk.css.map",
+    "static/js/2.d2775c47.chunk.js.LICENSE.txt": "/Starter-Helium-API/static/js/2.d2775c47.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a1069441.js",
+    "static/css/2.96c243f5.chunk.css",
+    "static/js/2.d2775c47.chunk.js",
+    "static/css/main.69eda509.chunk.css",
+    "static/js/main.158f424f.chunk.js"
+  ]
+}
