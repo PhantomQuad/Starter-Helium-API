@@ -128,6 +128,14 @@ function Commission() {
       <Table>
         <thead>
           <tr>
+            <th>Current HNT Price</th>
+            <th>£{(helium / rate).toFixed(2)}</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
             <th>Account</th>
             <th>From</th>
             <th>To</th>
