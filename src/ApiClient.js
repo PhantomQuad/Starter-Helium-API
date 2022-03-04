@@ -25,13 +25,7 @@ export class ApiClient {
 
   getHelium() {
     return this.getRequest(
-      `https://api.nomics.com/v1/currencies/ticker?ids=HELIUM&key=548a0234c688c38923ef390762798f09bad21729`
-    );
-  }
-
-  getExchange() {
-    return this.getRequest(
-      `https://api.nomics.com/v1/exchange-rates?key=548a0234c688c38923ef390762798f09bad21729`
+      `https://api.coingecko.com/api/v3/simple/price?ids=helium&vs_currencies=gbp`
     );
   }
 

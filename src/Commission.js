@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { ApiClient } from "./ApiClient";
 import Table from "react-bootstrap/Table";
 import Nav from "react-bootstrap/Nav";
@@ -17,7 +17,6 @@ function Commission() {
   const apiClient = new ApiClient();
   const [stats, cStats] = useState({});
   const [helium, cHelium] = useState(0);
-  const [rate, cRate] = useState(0);
   const [percent, cPercent] = useState(0);
   const [search, cSearch] = useState([""]);
   // const [account, cAccount] = useState({
@@ -40,8 +39,8 @@ function Commission() {
     apiClient
       .getHelium()
       .then((res) => {
-        updateHelium(res.data[0]);
-        console.log(`refresh Helium array`, res.data);
+        updateHelium(res.data);
+        // console.log(`refresh Helium array`, res.data);
       })
       .catch((error) => {
         console.error(error);
@@ -49,8 +48,8 @@ function Commission() {
   };
 
   const updateHelium = (response) => {
-    cHelium(response.price);
-    console.log(response.price);
+    cHelium(response.helium.gbp);
+    // console.log(`price of HNT`,response.helium.gbp);
   };
 
   const runSearch = (input) => {
@@ -58,7 +57,7 @@ function Commission() {
       .runSearch(input)
       .then((res) => {
         cSearch(res.data.data);
-        console.log(`search array`, res.data.data);
+        // console.log(`search array`, res.data.data);
       })
       .catch((error) => {
         console.error(error);
@@ -70,7 +69,7 @@ function Commission() {
     let input = document.getElementById("searchHotspot").value;
     input = input.split(" ").join("-");
     runSearch(input);
-    console.log(`input is`, input);
+    // console.log(`input is`, input);
     document.getElementById("searchHotspot").value = "";
     // console.log(`event is`, event);
     // console.log(`event is`, event.target);
@@ -81,30 +80,12 @@ function Commission() {
   const updateHotspot = (names) => {
     let dosplit = names.name.split("-").join(" ");
     let docapitalize = dosplit.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
-    console.log(`names`, docapitalize);
-    console.log(`address`, names.address);
+    // console.log(`names`, docapitalize);
+    // console.log(`address`, names.address);
     cHotspot({
       name: docapitalize,
       address: names.address,
     });
-  };
-
-  const updateRate = (response) => {
-    response.map((current) =>
-      current.currency === "GBP" ? cRate(current.rate) : rate
-    );
-  };
-
-  const setRate = () => {
-    apiClient
-      .getExchange()
-      .then((res) => {
-        updateRate(res.data);
-        // console.log(`refresh Exchange array`, res.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   };
 
   const refreshStats = () => {
@@ -116,7 +97,7 @@ function Commission() {
       )
       .then((res) => {
         updateStats(res.data);
-        console.log(`refresh Accounts array`, res.data);
+        // console.log(`refresh Accounts array`, res.data);
       })
       .catch((error) => {
         console.error(error);
@@ -129,7 +110,7 @@ function Commission() {
         <thead>
           <tr>
             <th>Current HNT Price</th>
-            <th>£{(helium / rate).toFixed(2)}</th>
+            <th>£{(helium).toFixed(2)}</th>
             <th></th>
             <th></th>
             <th></th>
@@ -186,16 +167,17 @@ function Commission() {
             <td></td>
             <td></td>
             <td></td>
-            <td>£{((stats.host * helium) / rate).toFixed(2)}</td>
-            <td>£{((stats.total * helium) / rate).toFixed(2)}</td>
+            <td>£{(stats.host * helium).toFixed(2)}</td>
+            <td>£{(stats.total * helium).toFixed(2)}</td>
           </tr>
         </tbody>
       </Table>
+      
     );
   };
 
   const buildHotspotList = () => {
-    if (search != "") {
+    if (search !== "") {
       return (
         <DropdownButton
           menuVariant="dark"
@@ -213,15 +195,8 @@ function Commission() {
           ))}
         </DropdownButton>
       );
-    } else {
-      return console.log("search currently empty");
     }
   };
-
-  useEffect(() => {
-    setRate();
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <>
@@ -244,7 +219,7 @@ function Commission() {
           Search
         </Button>
       </Form>
-      {buildHotspotList()};
+      {buildHotspotList()}
     </>
   );
 }
