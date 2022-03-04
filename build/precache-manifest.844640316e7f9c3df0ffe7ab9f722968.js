@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ffc7f7f8a2302469055a53b89d449ce1",
+    "revision": "0d5305068de1d6c3bd0f10635be6126c",
     "url": "/Starter-Helium-API/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Starter-Helium-API/static/css/2.96c243f5.chunk.css"
   },
   {
-    "revision": "5d039ce20728f172f0b7",
+    "revision": "9f0807cec87d2f96f07d",
     "url": "/Starter-Helium-API/static/css/main.69eda509.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Starter-Helium-API/static/js/2.d2775c47.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5d039ce20728f172f0b7",
-    "url": "/Starter-Helium-API/static/js/main.df9273ca.chunk.js"
+    "revision": "9f0807cec87d2f96f07d",
+    "url": "/Starter-Helium-API/static/js/main.d71a03fa.chunk.js"
   },
   {
     "revision": "0072d500c35481a58d96",
