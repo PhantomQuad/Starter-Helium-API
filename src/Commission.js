@@ -200,7 +200,7 @@ function Commission() {
 
   return (
     <>
-      {buildPayouts()};
+      {buildPayouts()}
       <Button variant="primary" type="submit" onClick={() => refreshStats()}>
         Update Page
       </Button>

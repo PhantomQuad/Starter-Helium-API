@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Starter-Helium-API/precache-manifest.0cfd9c2530bafcce866ce2cce10ea7b1.js"
+  "/Starter-Helium-API/precache-manifest.6c6393157bfe5aa127b8f291b5b23c33.js"
 );
 
 self.addEventListener('message', (event) => {
