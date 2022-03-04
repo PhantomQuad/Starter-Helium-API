@@ -14,10 +14,10 @@ export class ApiClient {
   }
 
   getPayout(hotspot, startDate, endDate) {
-    console.log("hotspot", hotspot);
-    console.log("hotspot name", hotspot.name);
-    console.log("start date", startDate);
-    console.log("end date", endDate);
+    // console.log("hotspot", hotspot);
+    // console.log("hotspot name", hotspot.name);
+    // console.log("start date", startDate);
+    // console.log("end date", endDate);
     return this.getRequest(
       `https://api.helium.io/v1/hotspots/${hotspot.address}/rewards/sum?max_time=${endDate}T23:59:59Z&min_time=${startDate}T00:00:00Z`
     );

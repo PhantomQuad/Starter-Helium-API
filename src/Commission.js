@@ -177,7 +177,7 @@ function Commission() {
   };
 
   const buildHotspotList = () => {
-    if (search !== "") {
+    if (search != "") {
       return (
         <DropdownButton
           menuVariant="dark"
