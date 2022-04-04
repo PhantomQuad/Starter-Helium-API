@@ -3,6 +3,7 @@ import { ApiClient } from "./ApiClient";
 import Table from "react-bootstrap/Table";
 import Nav from "react-bootstrap/Nav";
 import DatePicker from "react-datepicker";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -22,7 +23,11 @@ function Commission() {
   // const [account, cAccount] = useState({
   //   address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
   // });
-  const [hotspot, cHotspot] = useState([
+  const [hotspot, cHotspot] = useState({
+    name: "Joyous Brunette Sawfish",
+    address: "112S8e9e8E1bxnmVvSLzcjVonexMd6Rj6wKtPJtYgKeYQVFYuHdB",
+  });
+  const [hotspots, cHotspots] = useState([
     {
       name: "Rich Opaque Manatee",
       address: "11DNgaGBokeVLmpFWrtf9m4DefG5W7C42XhjonQHoVFL6soF7AH",
@@ -126,57 +131,6 @@ function Commission() {
       });
   };
 
-  const buildRows = () => {
-    hotspot.map((current) => {
-      <>
-        <tr>
-          <td>
-            <Nav.Item>
-              <Nav.Link target="_blank" href={hotspotLink + current.address}>
-                {current.name}
-              </Nav.Link>
-            </Nav.Item>
-          </td>
-          <td>
-            <DatePicker
-              dateFormat="dd-MM-yyyy"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-            >
-              <div style={{ color: "red" }}>Start Date!</div>
-            </DatePicker>
-          </td>
-          <td>
-            <DatePicker
-              dateFormat="dd-MM-yyyy"
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-            >
-              <div style={{ color: "red" }}>End Date!</div>
-            </DatePicker>
-          </td>
-          {/* <td>{percent}</td> */}
-          <td>
-            <input
-              type="number"
-              onChange={(e) => cPercent(e.target.value)}
-            ></input>
-          </td>
-          <td>{stats.host}HNT</td>
-          <td>{stats.total}HNT</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>£{(stats.host * helium).toFixed(2)}</td>
-          <td>£{(stats.total * helium).toFixed(2)}</td>
-        </tr>
-      </>;
-    });
-  };
-
   const buildPayouts = () => {
     return (
       <Table>
@@ -199,57 +153,52 @@ function Commission() {
           </tr>
         </thead>
         <tbody>
-          {hotspot.map((current, index) => {
-            <>
-              <tr key={index}>
-                <td>
-                  <Nav.Item>
-                    <Nav.Link
-                      target="_blank"
-                      href={hotspotLink + current.address}
-                    >
-                      {current.name}
-                    </Nav.Link>
-                  </Nav.Item>
-                </td>
-                <td>
-                  <DatePicker
-                    dateFormat="dd-MM-yyyy"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                  >
-                    <div style={{ color: "red" }}>Start Date!</div>
-                  </DatePicker>
-                </td>
-                <td>
-                  <DatePicker
-                    dateFormat="dd-MM-yyyy"
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                  >
-                    <div style={{ color: "red" }}>End Date!</div>
-                  </DatePicker>
-                </td>
-                {/* <td>{percent}</td> */}
-                <td>
-                  <input
-                    type="number"
-                    onChange={(e) => cPercent(e.target.value)}
-                  ></input>
-                </td>
-                <td>{stats.host}HNT</td>
-                <td>{stats.total}HNT</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>£{(stats.host * helium).toFixed(2)}</td>
-                <td>£{(stats.total * helium).toFixed(2)}</td>
-              </tr>
-            </>;
-          })}
+          <tr>
+            {/* {console.log(current.name)} */}
+
+            <td>
+              <Nav.Item>
+                <Nav.Link target="_blank" href={hotspotLink + hotspot.address}>
+                  {hotspot.name}
+                </Nav.Link>
+              </Nav.Item>
+            </td>
+            <td>
+              <DatePicker
+                dateFormat="dd-MM-yyyy"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              >
+                <div style={{ color: "red" }}>Start Date!</div>
+              </DatePicker>
+            </td>
+            <td>
+              <DatePicker
+                dateFormat="dd-MM-yyyy"
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+              >
+                <div style={{ color: "red" }}>End Date!</div>
+              </DatePicker>
+            </td>
+            {/* <td>{percent}</td> */}
+            <td>
+              <input
+                type="number"
+                onChange={(e) => cPercent(e.target.value)}
+              ></input>
+            </td>
+            <td>{stats.host}HNT</td>
+            <td>{stats.total}HNT</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>£{(stats.host * helium).toFixed(2)}</td>
+            <td>£{(stats.total * helium).toFixed(2)}</td>
+          </tr>
         </tbody>
       </Table>
     );
@@ -264,6 +213,24 @@ function Commission() {
           title="Select your hotspot"
         >
           {search.map((names, index) => (
+            <Dropdown.Item
+              key={index}
+              as="button"
+              onClick={() => updateHotspot(names)}
+            >
+              {names.name}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
+      );
+    } else {
+      return (
+        <DropdownButton
+          menuVariant="dark"
+          id="dropdown-item-button"
+          title="Select your hotspot"
+        >
+          {hotspots.map((names, index) => (
             <Dropdown.Item
               key={index}
               as="button"
