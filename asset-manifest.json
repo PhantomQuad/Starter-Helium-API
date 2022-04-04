@@ -1,25 +1,13 @@
 {
   "files": {
-    "main.css": "/Starter-Helium-API/static/css/main.69eda509.chunk.css",
-    "main.js": "/Starter-Helium-API/static/js/main.f2872cc7.chunk.js",
-    "main.js.map": "/Starter-Helium-API/static/js/main.f2872cc7.chunk.js.map",
-    "runtime-main.js": "/Starter-Helium-API/static/js/runtime-main.a1069441.js",
-    "runtime-main.js.map": "/Starter-Helium-API/static/js/runtime-main.a1069441.js.map",
-    "static/css/2.edc52e77.chunk.css": "/Starter-Helium-API/static/css/2.edc52e77.chunk.css",
-    "static/js/2.35ecd7d6.chunk.js": "/Starter-Helium-API/static/js/2.35ecd7d6.chunk.js",
-    "static/js/2.35ecd7d6.chunk.js.map": "/Starter-Helium-API/static/js/2.35ecd7d6.chunk.js.map",
+    "main.css": "/Starter-Helium-API/static/css/main.f7c8aae9.css",
+    "main.js": "/Starter-Helium-API/static/js/main.0a6d9418.js",
     "index.html": "/Starter-Helium-API/index.html",
-    "precache-manifest.a217ba1d0631e4b85e90c92183f5de83.js": "/Starter-Helium-API/precache-manifest.a217ba1d0631e4b85e90c92183f5de83.js",
-    "service-worker.js": "/Starter-Helium-API/service-worker.js",
-    "static/css/2.edc52e77.chunk.css.map": "/Starter-Helium-API/static/css/2.edc52e77.chunk.css.map",
-    "static/css/main.69eda509.chunk.css.map": "/Starter-Helium-API/static/css/main.69eda509.chunk.css.map",
-    "static/js/2.35ecd7d6.chunk.js.LICENSE.txt": "/Starter-Helium-API/static/js/2.35ecd7d6.chunk.js.LICENSE.txt"
+    "main.f7c8aae9.css.map": "/Starter-Helium-API/static/css/main.f7c8aae9.css.map",
+    "main.0a6d9418.js.map": "/Starter-Helium-API/static/js/main.0a6d9418.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.a1069441.js",
-    "static/css/2.edc52e77.chunk.css",
-    "static/js/2.35ecd7d6.chunk.js",
-    "static/css/main.69eda509.chunk.css",
-    "static/js/main.f2872cc7.chunk.js"
+    "static/css/main.f7c8aae9.css",
+    "static/js/main.0a6d9418.js"
   ]
 }
