@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { ApiClient } from "./ApiClient";
 import Table from "react-bootstrap/Table";
 import Nav from "react-bootstrap/Nav";
@@ -22,10 +22,32 @@ function Commission() {
   // const [account, cAccount] = useState({
   //   address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
   // });
-  const [hotspot, cHotspot] = useState({
-    name: "Delightful Walnut Starling",
-    address: "112KWyajxjigtBZQyHUzqGtUjAFPWaE4uCWpqzbJWs5pYqZZajvL",
-  });
+  const [hotspot, cHotspot] = useState([
+    {
+      name: "Rich Opaque Manatee",
+      address: "11DNgaGBokeVLmpFWrtf9m4DefG5W7C42XhjonQHoVFL6soF7AH",
+    },
+    {
+      name: "Restless Juniper Otter",
+      address: "112jtXU5nbxfrXFLyzSo4p4E4URMqghjugE3Tuy4ZTctWn7dgN2y",
+    },
+    {
+      name: "Bent Merlot Unicorn",
+      address: "11khQP8xKHBJpbyH4snShTF9ZzS9GTMfVcHMJQPNLpnDDoiWvaX",
+    },
+    {
+      name: "Dry Arctic Moose",
+      address: "112nSoWzJgA8dfKHgfJKPAfxZwbFNSdK6KwG269xpFL8xYHFCTZJ",
+    },
+    {
+      name: "Delightful Walnut Starling",
+      address: "112KWyajxjigtBZQyHUzqGtUjAFPWaE4uCWpqzbJWs5pYqZZajvL",
+    },
+    {
+      name: "Joyous Brunette Sawfish",
+      address: "112S8e9e8E1bxnmVvSLzcjVonexMd6Rj6wKtPJtYgKeYQVFYuHdB",
+    },
+  ]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -104,13 +126,64 @@ function Commission() {
       });
   };
 
+  const buildRows = () => {
+    hotspot.map((current) => {
+      <>
+        <tr>
+          <td>
+            <Nav.Item>
+              <Nav.Link target="_blank" href={hotspotLink + current.address}>
+                {current.name}
+              </Nav.Link>
+            </Nav.Item>
+          </td>
+          <td>
+            <DatePicker
+              dateFormat="dd-MM-yyyy"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            >
+              <div style={{ color: "red" }}>Start Date!</div>
+            </DatePicker>
+          </td>
+          <td>
+            <DatePicker
+              dateFormat="dd-MM-yyyy"
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+            >
+              <div style={{ color: "red" }}>End Date!</div>
+            </DatePicker>
+          </td>
+          {/* <td>{percent}</td> */}
+          <td>
+            <input
+              type="number"
+              onChange={(e) => cPercent(e.target.value)}
+            ></input>
+          </td>
+          <td>{stats.host}HNT</td>
+          <td>{stats.total}HNT</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>£{(stats.host * helium).toFixed(2)}</td>
+          <td>£{(stats.total * helium).toFixed(2)}</td>
+        </tr>
+      </>;
+    });
+  };
+
   const buildPayouts = () => {
     return (
       <Table>
         <thead>
           <tr>
             <th>Current HNT Price</th>
-            <th>£{(helium).toFixed(2)}</th>
+            <th>£{helium.toFixed(2)}</th>
             <th></th>
             <th></th>
             <th></th>
@@ -126,53 +199,59 @@ function Commission() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <Nav.Item>
-                <Nav.Link target="_blank" href={hotspotLink + hotspot.address}>
-                  {hotspot.name}
-                </Nav.Link>
-              </Nav.Item>
-            </td>
-            <td>
-              <DatePicker
-                dateFormat="dd-MM-yyyy"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              >
-                <div style={{ color: "red" }}>Start Date!</div>
-              </DatePicker>
-            </td>
-            <td>
-              <DatePicker
-                dateFormat="dd-MM-yyyy"
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-              >
-                <div style={{ color: "red" }}>End Date!</div>
-              </DatePicker>
-            </td>
-            {/* <td>{percent}</td> */}
-            <td>
-              <input
-                type="number"
-                onChange={(e) => cPercent(e.target.value)}
-              ></input>
-            </td>
-            <td>{stats.host}HNT</td>
-            <td>{stats.total}HNT</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>£{(stats.host * helium).toFixed(2)}</td>
-            <td>£{(stats.total * helium).toFixed(2)}</td>
-          </tr>
+          {hotspot.map((current, index) => {
+            <>
+              <tr key={index}>
+                <td>
+                  <Nav.Item>
+                    <Nav.Link
+                      target="_blank"
+                      href={hotspotLink + current.address}
+                    >
+                      {current.name}
+                    </Nav.Link>
+                  </Nav.Item>
+                </td>
+                <td>
+                  <DatePicker
+                    dateFormat="dd-MM-yyyy"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                  >
+                    <div style={{ color: "red" }}>Start Date!</div>
+                  </DatePicker>
+                </td>
+                <td>
+                  <DatePicker
+                    dateFormat="dd-MM-yyyy"
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                  >
+                    <div style={{ color: "red" }}>End Date!</div>
+                  </DatePicker>
+                </td>
+                {/* <td>{percent}</td> */}
+                <td>
+                  <input
+                    type="number"
+                    onChange={(e) => cPercent(e.target.value)}
+                  ></input>
+                </td>
+                <td>{stats.host}HNT</td>
+                <td>{stats.total}HNT</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>£{(stats.host * helium).toFixed(2)}</td>
+                <td>£{(stats.total * helium).toFixed(2)}</td>
+              </tr>
+            </>;
+          })}
         </tbody>
       </Table>
-      
     );
   };
 
