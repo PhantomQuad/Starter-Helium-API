@@ -23,6 +23,12 @@ export class ApiClient {
     );
   }
 
+  getHotspots(account) {
+    return this.getRequest(
+      `https://api.helium.io/v1/accounts/${account.address}/hotspots`
+    );
+  }
+
   getHelium() {
     return this.getRequest(
       `https://api.coingecko.com/api/v3/simple/price?ids=helium&vs_currencies=gbp`

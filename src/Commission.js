@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ApiClient } from "./ApiClient";
 import Table from "react-bootstrap/Table";
 import Nav from "react-bootstrap/Nav";
@@ -20,39 +20,14 @@ function Commission() {
   const [helium, cHelium] = useState(0);
   const [percent, cPercent] = useState(0);
   const [search, cSearch] = useState([""]);
-  // const [account, cAccount] = useState({
-  //   address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
-  // });
+  const [account, cAccount] = useState({
+    address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
+  });
   const [hotspot, cHotspot] = useState({
     name: "Joyous Brunette Sawfish",
     address: "112S8e9e8E1bxnmVvSLzcjVonexMd6Rj6wKtPJtYgKeYQVFYuHdB",
   });
-  const [hotspots, cHotspots] = useState([
-    {
-      name: "Rich Opaque Manatee",
-      address: "11DNgaGBokeVLmpFWrtf9m4DefG5W7C42XhjonQHoVFL6soF7AH",
-    },
-    {
-      name: "Restless Juniper Otter",
-      address: "112jtXU5nbxfrXFLyzSo4p4E4URMqghjugE3Tuy4ZTctWn7dgN2y",
-    },
-    {
-      name: "Bent Merlot Unicorn",
-      address: "11khQP8xKHBJpbyH4snShTF9ZzS9GTMfVcHMJQPNLpnDDoiWvaX",
-    },
-    {
-      name: "Dry Arctic Moose",
-      address: "112nSoWzJgA8dfKHgfJKPAfxZwbFNSdK6KwG269xpFL8xYHFCTZJ",
-    },
-    {
-      name: "Delightful Walnut Starling",
-      address: "112KWyajxjigtBZQyHUzqGtUjAFPWaE4uCWpqzbJWs5pYqZZajvL",
-    },
-    {
-      name: "Joyous Brunette Sawfish",
-      address: "112S8e9e8E1bxnmVvSLzcjVonexMd6Rj6wKtPJtYgKeYQVFYuHdB",
-    },
-  ]);
+  const [hotspots, cHotspots] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -72,6 +47,10 @@ function Commission() {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const updateHotspots = (response) => {
+    cHotspots(response.data);
   };
 
   const updateHelium = (response) => {
@@ -113,6 +92,18 @@ function Commission() {
       name: docapitalize,
       address: names.address,
     });
+  };
+
+  const refreshHotspots = () => {
+    apiClient
+      .getHotspots(account)
+      .then((res) => {
+        updateHotspots(res.data);
+        // console.log(`refresh Accounts array`, res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const refreshStats = () => {
@@ -243,6 +234,10 @@ function Commission() {
       );
     }
   };
+
+  useEffect(() => {
+    refreshHotspots();
+  }, []);
 
   return (
     <>
