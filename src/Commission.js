@@ -1,8 +1,9 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import { ApiClient } from "./ApiClient";
 import Table from "react-bootstrap/Table";
 import Nav from "react-bootstrap/Nav";
 import DatePicker from "react-datepicker";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -19,13 +20,14 @@ function Commission() {
   const [helium, cHelium] = useState(0);
   const [percent, cPercent] = useState(0);
   const [search, cSearch] = useState([""]);
-  // const [account, cAccount] = useState({
-  //   address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
-  // });
-  const [hotspot, cHotspot] = useState({
-    name: "Delightful Walnut Starling",
-    address: "112KWyajxjigtBZQyHUzqGtUjAFPWaE4uCWpqzbJWs5pYqZZajvL",
+  const [account, cAccount] = useState({
+    address: "14pdsYdHs738B84vKdHWrbSKyL5TfagyJekFwxZBnnigiRLN6fV",
   });
+  const [hotspot, cHotspot] = useState({
+    name: "Joyous Brunette Sawfish",
+    address: "112S8e9e8E1bxnmVvSLzcjVonexMd6Rj6wKtPJtYgKeYQVFYuHdB",
+  });
+  const [hotspots, cHotspots] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -45,6 +47,10 @@ function Commission() {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const updateHotspots = (response) => {
+    cHotspots(response.data);
   };
 
   const updateHelium = (response) => {
@@ -88,6 +94,18 @@ function Commission() {
     });
   };
 
+  const refreshHotspots = () => {
+    apiClient
+      .getHotspots(account)
+      .then((res) => {
+        updateHotspots(res.data);
+        // console.log(`refresh Accounts array`, res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const refreshStats = () => {
     apiClient
       .getPayout(
@@ -110,7 +128,7 @@ function Commission() {
         <thead>
           <tr>
             <th>Current HNT Price</th>
-            <th>£{(helium).toFixed(2)}</th>
+            <th>£{helium.toFixed(2)}</th>
             <th></th>
             <th></th>
             <th></th>
@@ -127,6 +145,8 @@ function Commission() {
         </thead>
         <tbody>
           <tr>
+            {/* {console.log(current.name)} */}
+
             <td>
               <Nav.Item>
                 <Nav.Link target="_blank" href={hotspotLink + hotspot.address}>
@@ -172,7 +192,6 @@ function Commission() {
           </tr>
         </tbody>
       </Table>
-      
     );
   };
 
@@ -195,8 +214,30 @@ function Commission() {
           ))}
         </DropdownButton>
       );
+    } else {
+      return (
+        <DropdownButton
+          menuVariant="dark"
+          id="dropdown-item-button"
+          title="Select your hotspot"
+        >
+          {hotspots.map((names, index) => (
+            <Dropdown.Item
+              key={index}
+              as="button"
+              onClick={() => updateHotspot(names)}
+            >
+              {names.name}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
+      );
     }
   };
+
+  useEffect(() => {
+    refreshHotspots();
+  }, []);
 
   return (
     <>
