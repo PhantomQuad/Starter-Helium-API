@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ApiClient } from "./ApiClient";
 import Table from "react-bootstrap/Table";
 import Nav from "react-bootstrap/Nav";
-import DatePicker from "react-datepicker";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -11,6 +10,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
+import DatePick from "./DatePick";
 
 function Commission() {
   // const accountLink = "https://explorer.helium.com/accounts/";
@@ -28,8 +28,6 @@ function Commission() {
     address: "112S8e9e8E1bxnmVvSLzcjVonexMd6Rj6wKtPJtYgKeYQVFYuHdB",
   });
   const [hotspots, cHotspots] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
 
   const updateStats = (response) => {
     cStats({
@@ -110,9 +108,9 @@ function Commission() {
   const refreshStats = () => {
     apiClient
       .getPayout(
-        hotspot,
-        startDate.toLocaleDateString("sv-SE"),
-        endDate.toLocaleDateString("sv-SE")
+        hotspot
+        // startDate.toLocaleDateString("sv-SE"),
+        // endDate.toLocaleDateString("sv-SE")
       )
       .then((res) => {
         updateStats(res.data);
@@ -123,82 +121,105 @@ function Commission() {
       });
   };
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(e);
+    // console.log(this);
+
+    console.log(e.target);
+    Array.from(e.target).map((res) => {
+      console.log(res.value);
+    });
+  };
+
   const buildPayouts = () => {
     return (
-      <Table>
-        <thead>
-          <tr>
-            <th>Current HNT Price</th>
-            <th>£{helium.toFixed(2)}</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-          <tr>
-            <th>Account</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Host(%)</th>
-            <th>Host Share</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Form id="hotspotTableForm" onSubmit={(e) => submitHandler(e)}>
+        <Table>
+          <thead>
+            <tr>
+              <th>Current HNT Price</th>
+              <th>£{helium.toFixed(2)}</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <th>Account</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Host(%)</th>
+              <th>Host Share</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {hotspots.map((host, idx) => (
+              <tr>
+                {/* {console.log(current.name)} */}
 
-          {hotspots.map((host,key) =>(
-          
-          <tr>
-            {/* {console.log(current.name)} */}
-
-            <td>
-              <Nav.Item>
-                <Nav.Link target="_blank" href={hotspotLink + host.address}>
-                  {host.name}
-                </Nav.Link>
-              </Nav.Item>
-            </td>
-            <td>
-              <DatePicker
-              name="date-"
-                dateFormat="dd-MM-yyyy"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              >
-                <div style={{ color: "red" }}>Start Date!</div>
-              </DatePicker>
-            </td>
-            <td>
-              <DatePicker
-                dateFormat="dd-MM-yyyy"
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-              >
-                <div style={{ color: "red" }}>End Date!</div>
-              </DatePicker>
-            </td>
-            {/* <td>{percent}</td> */}
-            <td>
-              <input
-                type="number"
-                value="25"
-                onChange={(e) => cPercent(e.target.value)}
-              ></input>
-            </td>
-            <td>{stats.host}HNT</td>
-            <td>{stats.total}HNT</td>
-          </tr>
-          ))}
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>£{(stats.host * helium).toFixed(2)}</td>
-            <td>£{(stats.total * helium).toFixed(2)}</td>
-          </tr>
-        </tbody>
-      </Table>
+                <td>
+                  <a href={hotspotLink + host.address} target="_blank">
+                    {host.name}
+                  </a>
+                </td>
+                <td>
+                  <DatePick
+                    id={`startdate-${idx}`}
+                    name={`startdate-${idx}`}
+                    text="Start Date!"
+                  />
+                </td>
+                <td>
+                  <DatePick
+                    id={`enddate-${idx}`}
+                    name={`enddate-${idx}`}
+                    text="End Date!"
+                  />
+                </td>
+                {/* <td>{percent}</td> */}
+                <td>
+                  <input
+                    id={`percent-${idx}`}
+                    name={`percent-${idx}`}
+                    type="number"
+                    defaultValue={25}
+                    // onChange={(e) => cPercent(e.target.value)}
+                  ></input>
+                </td>
+                <td>
+                  <input type="text" id={`hosthnt-${idx}`}></input>HNT
+                </td>
+                <td>
+                  <input type="text" id={`totalhnt-${idx}`}></input>HNT
+                </td>
+                {/* <td>{stats.host}HNT</td>
+                <td>{stats.total}HNT</td> */}
+              </tr>
+            ))}
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>£{(stats.host * helium).toFixed(2)}</td>
+              <td>£{(stats.total * helium).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>£{(stats.host * helium).toFixed(2)}</td>
+              <td>£{(stats.total * helium).toFixed(2)}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <Button variant="primary" type="submit">
+          Update Page
+        </Button>
+      </Form>
     );
   };
 
@@ -249,9 +270,7 @@ function Commission() {
   return (
     <>
       {buildPayouts()}
-      <Button variant="primary" type="submit" onClick={() => refreshStats()}>
-        Update Page
-      </Button>
+
       <Form>
         <input
           type="text"
