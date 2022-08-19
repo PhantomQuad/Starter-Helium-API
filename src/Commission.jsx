@@ -49,9 +49,9 @@ function Commission() {
       });
   };
 
-  const updateHotspots = (response) => {
-    cHotspots(response.data);
-  };
+  // const updateHotspots = (response) => {
+  //   cHotspots(response.data);
+  // };
 
   const updateHelium = (response) => {
     cHelium(response.helium.gbp);
@@ -98,7 +98,8 @@ function Commission() {
     apiClient
       .getHotspots(account)
       .then((res) => {
-        updateHotspots(res.data);
+        cHotspots(res.data.data);
+        console.log(`refresh Accounts array`, res.data.data);
         // console.log(`refresh Accounts array`, res.data);
       })
       .catch((error) => {
@@ -144,18 +145,22 @@ function Commission() {
           </tr>
         </thead>
         <tbody>
+
+          {hotspots.map((host,key) =>(
+          
           <tr>
             {/* {console.log(current.name)} */}
 
             <td>
               <Nav.Item>
-                <Nav.Link target="_blank" href={hotspotLink + hotspot.address}>
-                  {hotspot.name}
+                <Nav.Link target="_blank" href={hotspotLink + host.address}>
+                  {host.name}
                 </Nav.Link>
               </Nav.Item>
             </td>
             <td>
               <DatePicker
+              name="date-"
                 dateFormat="dd-MM-yyyy"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
@@ -176,12 +181,14 @@ function Commission() {
             <td>
               <input
                 type="number"
+                value="25"
                 onChange={(e) => cPercent(e.target.value)}
               ></input>
             </td>
             <td>{stats.host}HNT</td>
             <td>{stats.total}HNT</td>
           </tr>
+          ))}
           <tr>
             <td></td>
             <td></td>
